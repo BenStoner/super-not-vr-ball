@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://c6u30yt620yww"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_3agts"]
+[ext_resource type="Texture2D" uid="uid://dyrw7knyq5oqt" path="res://addons/kenney_prototype_textures/red/texture_01.png" id="1_c0s18"]
+[ext_resource type="Script" path="res://addons/control_camera3d/nodes/control_camera_3d.gd" id="3_mhrd6"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dmg1t"]
+bounce = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_u4sjg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54ba2"]
+albedo_texture = ExtResource("1_c0s18")
+uv1_triplanar = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_j01ks"]
+
+[node name="Player" type="Node3D"]
+script = ExtResource("1_3agts")
+
+[node name="Ball" type="RigidBody3D" parent="."]
+collision_mask = 6
+physics_material_override = SubResource("PhysicsMaterial_dmg1t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball"]
+shape = SubResource("SphereShape3D_u4sjg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball"]
+material_override = SubResource("StandardMaterial3D_54ba2")
+mesh = SubResource("SphereMesh_j01ks")
+skeleton = NodePath("../Ball")
+
+[node name="ControlCamera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.976878, 0.213798, 0, -0.213798, 0.976878, 0, 1.4577, 6.66048)
+script = ExtResource("3_mhrd6")
