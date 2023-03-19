@@ -1,35 +1,41 @@
 [gd_scene load_steps=8 format=3 uid="uid://c6u30yt620yww"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_3agts"]
-[ext_resource type="Texture2D" uid="uid://dyrw7knyq5oqt" path="res://addons/kenney_prototype_textures/red/texture_01.png" id="1_c0s18"]
-[ext_resource type="Script" path="res://addons/control_camera3d/nodes/control_camera_3d.gd" id="3_mhrd6"]
+[ext_resource type="Script" path="res://addons/interpolated_camera_3d/interpolated_camera_3d.gd" id="2_ij640"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dmg1t"]
-bounce = 0.5
+bounce = 0.3
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_u4sjg"]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hukay"]
+load_path = "res://.godot/imported/texture_01.png-44f9331a67ce6f062549bc436289d3c9.etc2.ctex"
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54ba2"]
-albedo_texture = ExtResource("1_c0s18")
+albedo_texture = SubResource("CompressedTexture2D_hukay")
 uv1_triplanar = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_j01ks"]
 
-[node name="Player" type="Node3D"]
-script = ExtResource("1_3agts")
-
-[node name="Ball" type="RigidBody3D" parent="."]
+[node name="Ball" type="RigidBody3D"]
 collision_mask = 6
 physics_material_override = SubResource("PhysicsMaterial_dmg1t")
+script = ExtResource("1_3agts")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_u4sjg")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_54ba2")
 mesh = SubResource("SphereMesh_j01ks")
 skeleton = NodePath("../Ball")
 
-[node name="ControlCamera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.976878, 0.213798, 0, -0.213798, 0.976878, 0, 1.4577, 6.66048)
-script = ExtResource("3_mhrd6")
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, -4.68079e-16, 3.27752e-16, 3.27752e-16, 0.939693, 0.34202, -4.68079e-16, -0.34202, 0.939693, 2.08165e-12, 6, 10)
+top_level = true
+script = ExtResource("2_ij640")
+target = NodePath("../CameraTarget")
+
+[node name="CameraTarget" type="Node3D" parent="."]
+transform = Transform3D(1, -4.68079e-16, 3.27752e-16, 3.27752e-16, 0.939693, 0.34202, -4.68079e-16, -0.34202, 0.939693, 2.08165e-12, 3.5, 5)
+top_level = true
