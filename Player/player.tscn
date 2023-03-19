@@ -2,18 +2,19 @@
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_3agts"]
 [ext_resource type="Script" path="res://addons/interpolated_camera_3d/interpolated_camera_3d.gd" id="2_ij640"]
+[ext_resource type="Shader" path="res://Player/glass.gdshader" id="2_ydqjd"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dmg1t"]
 bounce = 0.3
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_u4sjg"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hukay"]
-load_path = "res://.godot/imported/texture_01.png-44f9331a67ce6f062549bc436289d3c9.etc2.ctex"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54ba2"]
-albedo_texture = SubResource("CompressedTexture2D_hukay")
-uv1_triplanar = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tvrn7"]
+render_priority = 0
+shader = ExtResource("2_ydqjd")
+shader_parameter/Color = Color(1, 1, 1, 1)
+shader_parameter/Shine = 1.0
+shader_parameter/Roughness = 0.2
 
 [sub_resource type="SphereMesh" id="SphereMesh_j01ks"]
 
@@ -26,16 +27,16 @@ script = ExtResource("1_3agts")
 shape = SubResource("SphereShape3D_u4sjg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_54ba2")
+material_override = SubResource("ShaderMaterial_tvrn7")
 mesh = SubResource("SphereMesh_j01ks")
 skeleton = NodePath("../Ball")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, -4.68079e-16, 3.27752e-16, 3.27752e-16, 0.939693, 0.34202, -4.68079e-16, -0.34202, 0.939693, 2.08165e-12, 6, 10)
+[node name="CameraTarget" type="Node3D" parent="."]
+transform = Transform3D(1, -4.3906e-16, 3.36902e-16, 3.36902e-16, 0.965926, 0.258819, -4.3906e-16, -0.258819, 0.965926, 2.08165e-12, 3.5, 8)
+top_level = true
+
+[node name="InterpolatedCamera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 3.5, 8)
 top_level = true
 script = ExtResource("2_ij640")
 target = NodePath("../CameraTarget")
-
-[node name="CameraTarget" type="Node3D" parent="."]
-transform = Transform3D(1, -4.68079e-16, 3.27752e-16, 3.27752e-16, 0.939693, 0.34202, -4.68079e-16, -0.34202, 0.939693, 2.08165e-12, 3.5, 5)
-top_level = true
