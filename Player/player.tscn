@@ -1,22 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://c6u30yt620yww"]
+[gd_scene load_steps=6 format=3 uid="uid://c6u30yt620yww"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_3agts"]
 [ext_resource type="Script" path="res://addons/interpolated_camera_3d/interpolated_camera_3d.gd" id="2_ij640"]
-[ext_resource type="Shader" path="res://Player/glass.gdshader" id="2_ydqjd"]
+[ext_resource type="PackedScene" uid="uid://d2kfeumn56wr2" path="res://Player/Models/BeachBall.tscn" id="3_frldj"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dmg1t"]
 bounce = 0.3
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_u4sjg"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tvrn7"]
-render_priority = 0
-shader = ExtResource("2_ydqjd")
-shader_parameter/Color = Color(1, 1, 1, 1)
-shader_parameter/Shine = 1.0
-shader_parameter/Roughness = 0.2
-
-[sub_resource type="SphereMesh" id="SphereMesh_j01ks"]
 
 [node name="Ball" type="RigidBody3D"]
 collision_mask = 6
@@ -25,11 +16,6 @@ script = ExtResource("1_3agts")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_u4sjg")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-material_override = SubResource("ShaderMaterial_tvrn7")
-mesh = SubResource("SphereMesh_j01ks")
-skeleton = NodePath("../Ball")
 
 [node name="CameraTarget" type="Node3D" parent="."]
 transform = Transform3D(1, -4.3906e-16, 3.36902e-16, 3.36902e-16, 0.965926, 0.258819, -4.3906e-16, -0.258819, 0.965926, 2.08165e-12, 3.5, 8)
@@ -40,3 +26,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 3.5, 8)
 top_level = true
 script = ExtResource("2_ij640")
 target = NodePath("../CameraTarget")
+
+[node name="beach_ball" parent="." instance=ExtResource("3_frldj")]
