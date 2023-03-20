@@ -7,6 +7,7 @@ var move_direction := Vector3.ZERO
 
 @onready var camera := $InterpolatedCamera3D
 @onready var camera_target := $CameraTarget
+@onready var jump_timer := $JumpTimer
 
 
 
@@ -20,8 +21,6 @@ func _physics_process(_delta):
 	if not Input.is_action_pressed("brake"):
 		apply_central_force(move_direction * speed)
 
-	print(move_direction)
-
 	# Braking
 	if Input.is_action_pressed("brake"):
 		linear_velocity.x = lerp(linear_velocity.x, 0.0, 0.1)
@@ -30,9 +29,11 @@ func _physics_process(_delta):
 		rotation.z = lerp(rotation.z, 0.0, 0.1)
 
 	# Small jump if not moving
-	if linear_velocity.x <= 0.15 and linear_velocity.y <= 0.15 and linear_velocity.y <= 0.15 and linear_velocity.x >= -0.15 and linear_velocity.y >= -0.15 and linear_velocity.y >= -0.15:
-		if Input.is_action_just_pressed("jump"):
-			apply_central_force(Vector3.UP * 200)
+	if jump_timer.is_stopped():
+		if linear_velocity.x <= 0.15 and linear_velocity.y <= 0.15 and linear_velocity.y <= 0.15 and linear_velocity.x >= -0.15 and linear_velocity.y >= -0.15 and linear_velocity.y >= -0.15:
+			if Input.is_action_just_pressed("jump"):
+				jump_timer.start()
+				apply_central_force(Vector3.UP * 200)
 
 	# Limits soeed
 	if abs(get_linear_velocity().x) > max_speed or abs(get_linear_velocity().y) > max_speed or abs(get_linear_velocity().z) > max_speed\
@@ -44,5 +45,3 @@ func _physics_process(_delta):
 	camera_target.global_position.x = global_position.x
 	camera_target.global_position.y = global_position.y + 3.5
 	camera_target.global_position.z = global_position.z + 8
-#	camera_target.look_at(global_position)
-

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_3agts"]
 [ext_resource type="Script" path="res://addons/interpolated_camera_3d/interpolated_camera_3d.gd" id="2_ij640"]
-[ext_resource type="PackedScene" uid="uid://d2kfeumn56wr2" path="res://Player/Models/BeachBall.tscn" id="3_frldj"]
+[ext_resource type="PackedScene" uid="uid://dycpp3hophw6v" path="res://Player/Models/ball.tscn" id="3_t28qo"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dmg1t"]
 bounce = 0.3
@@ -13,6 +13,8 @@ bounce = 0.3
 collision_mask = 6
 physics_material_override = SubResource("PhysicsMaterial_dmg1t")
 script = ExtResource("1_3agts")
+
+[node name="Ball" parent="." instance=ExtResource("3_t28qo")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_u4sjg")
@@ -27,4 +29,5 @@ top_level = true
 script = ExtResource("2_ij640")
 target = NodePath("../CameraTarget")
 
-[node name="beach_ball" parent="." instance=ExtResource("3_frldj")]
+[node name="JumpTimer" type="Timer" parent="."]
+one_shot = true
