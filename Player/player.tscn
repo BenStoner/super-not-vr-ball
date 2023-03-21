@@ -10,7 +10,8 @@ bounce = 0.3
 [sub_resource type="SphereShape3D" id="SphereShape3D_u4sjg"]
 
 [node name="Ball" type="RigidBody3D"]
-collision_mask = 6
+collision_layer = 4
+collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_dmg1t")
 script = ExtResource("1_3agts")
 
@@ -23,11 +24,10 @@ shape = SubResource("SphereShape3D_u4sjg")
 transform = Transform3D(1, -4.3906e-16, 3.36902e-16, 3.36902e-16, 0.965926, 0.258819, -4.3906e-16, -0.258819, 0.965926, 2.08165e-12, 3.5, 8)
 top_level = true
 
+[node name="JumpTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="InterpolatedCamera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 3.5, 8)
 top_level = true
 script = ExtResource("2_ij640")
-target = NodePath("../CameraTarget")
-
-[node name="JumpTimer" type="Timer" parent="."]
-one_shot = true

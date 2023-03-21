@@ -16,7 +16,7 @@ config/icon="res://icon.svg"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/interpolated_camera_3d/plugin.cfg", "res://addons/control_camera3d/plugin.cfg")
+enabled=PackedStringArray("res://addons/interpolated_camera_3d/plugin.cfg")
 
 [input]
 
@@ -62,9 +62,9 @@ jump={
 
 [layer_names]
 
-3d_physics/layer_1="Player"
-3d_physics/layer_2="Ground"
-3d_physics/layer_3="World"
+3d_physics/layer_1="Ground"
+3d_physics/layer_2="World"
+3d_physics/layer_3="Player"
 
 [rendering]
 
