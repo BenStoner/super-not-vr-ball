@@ -14,6 +14,10 @@ config/name="Super-not-vr-ball"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*res://AutoLoads/GameManager.gd"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/interpolated_camera_3d/plugin.cfg")
