@@ -1,18 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://c13ahlayu8n8y"]
+[gd_scene load_steps=4 format=3 uid="uid://b81ieihyae8c1"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_87iaa"]
+[ext_resource type="PackedScene" uid="uid://dnjy6n71se2eb" path="res://Levels/level.tscn" id="1_xebtf"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ptb71"]
 size = Vector2(100, 100)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ygvwj"]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6b3rk"]
 data = PackedVector3Array(50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, -50, 50, 0, -50)
 
-[node name="level" type="Node3D"]
+[node name="Level" instance=ExtResource("1_xebtf")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.229971, 0)
-mesh = SubResource("PlaneMesh_87iaa")
+[node name="Finish" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.03911)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0001, 0)
+mesh = SubResource("PlaneMesh_ptb71")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_ygvwj")
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_6b3rk")
