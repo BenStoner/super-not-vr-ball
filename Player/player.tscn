@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6u30yt620yww"]
+[gd_scene load_steps=7 format=3 uid="uid://c6u30yt620yww"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_3agts"]
 [ext_resource type="Script" path="res://addons/interpolated_camera_3d/interpolated_camera_3d.gd" id="2_ij640"]
@@ -9,9 +9,17 @@ bounce = 0.3
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_u4sjg"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_34hwx"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+
 [node name="Ball" type="RigidBody3D"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_dmg1t")
 script = ExtResource("1_3agts")
 
@@ -29,5 +37,7 @@ one_shot = true
 
 [node name="InterpolatedCamera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 3.5, 8)
-top_level = true
 script = ExtResource("2_ij640")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_34hwx")

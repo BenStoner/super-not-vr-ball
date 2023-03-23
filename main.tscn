@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://main.gd" id="1_goyri"]
 [ext_resource type="PackedScene" uid="uid://cpqna0u66nktt" path="res://Menus/MainMenu/main_menu.tscn" id="2_ml0ej"]
 [ext_resource type="PackedScene" uid="uid://yourphwkyhjc" path="res://Levels/Level1.tscn" id="3_ewqwc"]
-[ext_resource type="PackedScene" uid="uid://c6u30yt620yww" path="res://Player/player.tscn" id="4_43yqr"]
+[ext_resource type="PackedScene" uid="uid://c13ahlayu8n8y" path="res://Levels/Level2.tscn" id="4_xlwsc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2aubj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -20,7 +20,7 @@ glow_enabled = true
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_goyri")
-levels = Array[PackedScene]([ExtResource("2_ml0ej"), ExtResource("3_ewqwc")])
+levels = Array[PackedScene]([ExtResource("2_ml0ej"), ExtResource("3_ewqwc"), ExtResource("4_xlwsc")])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_c1yie")
@@ -29,4 +29,8 @@ environment = SubResource("Environment_c1yie")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Ball" parent="." instance=ExtResource("4_43yqr")]
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Player/player.tscn")
+spawn_path = NodePath("..")
+
+[node name="Players" type="Node" parent="."]

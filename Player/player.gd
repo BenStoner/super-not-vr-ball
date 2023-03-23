@@ -10,9 +10,19 @@ var move_direction := Vector3.ZERO
 @onready var jump_timer := $JumpTimer
 
 
+func _enter_tree() -> void:
+	set_multiplayer_authority(str(name).to_int())
+
+
+func _ready() -> void:
+	if not is_multiplayer_authority(): return
+
+	camera.make_current()
+
 
 func _physics_process(_delta):
-	# Movement
+	if not is_multiplayer_authority(): return
+#	# Movement
 	move_direction = Vector3.ZERO
 	move_direction.x = Input.get_axis("move_left", "move_right")
 	move_direction.z = Input.get_axis("move_forward", "move_backward")
