@@ -1,11 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://c40dwvxxtafc5"]
+[gd_scene load_steps=3 format=3 uid="uid://c40dwvxxtafc5"]
+
+[ext_resource type="PackedScene" uid="uid://84ktuki31uga" path="res://Finish/finish_model.tscn" id="1_fqgh5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dtnee"]
-size = Vector3(2, 1.5, 0.1)
+size = Vector3(4.95928, 2.55821, 0.386172)
 
 [node name="Finish" type="Area3D"]
 collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27992, 0)
 shape = SubResource("BoxShape3D_dtnee")
+
+[node name="Finish" parent="." instance=ExtResource("1_fqgh5")]

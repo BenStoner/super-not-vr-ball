@@ -6,10 +6,8 @@ extends RigidBody3D
 
 var move_direction := Vector3.ZERO
 
-@onready var camera := $InterpolatedCamera3D
-@onready var camera_target := $CameraTarget
 @onready var jump_timer := $JumpTimer
-
+@onready var camera := $Camera3D
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(str(name).to_int())
@@ -52,7 +50,3 @@ func _physics_process(_delta):
 		var new_speed = get_linear_velocity().normalized()
 		new_speed *= max_speed
 		set_linear_velocity(new_speed)
-
-	camera_target.global_position.x = global_position.x
-	camera_target.global_position.y = global_position.y + 3.5
-	camera_target.global_position.z = global_position.z + 8

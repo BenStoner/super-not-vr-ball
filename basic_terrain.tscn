@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dalcoojyx1hfx"]
+
+[ext_resource type="PackedScene" uid="uid://ogi01ttrl8m3" path="res://BasicTerrain.gltf" id="1_qnfx6"]
+
+[node name="BasicTerrain" instance=ExtResource("1_qnfx6")]
