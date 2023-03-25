@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://84ktuki31uga"]
 
-[ext_resource type="PackedScene" uid="uid://cyuh51wa6i5pa" path="res://Finish/Finish.gltf" id="1_rv2ui"]
+[ext_resource type="PackedScene" uid="uid://cyuh51wa6i5pa" path="res://Levels/Finish/Finish.gltf" id="1_rv2ui"]
 
 [node name="Finish" instance=ExtResource("1_rv2ui")]
 

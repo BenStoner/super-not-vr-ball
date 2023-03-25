@@ -10,6 +10,7 @@ const PORT = 9999
 @export var levels: Array[PackedScene] = []
 
 var current_level
+var current_level_number
 
 var enet_peer = ENetMultiplayerPeer.new()
 
@@ -21,26 +22,17 @@ func _ready() -> void:
 	var start_level_instance = start_level.instantiate()
 	add_child(start_level_instance)
 
+	multiplayer.server_relay = false
 
-@rpc("call_local")
-func change_level(to: int, free: bool):
-	if free == true:
-		current_level.queue_free()
-
-	var level_instance = levels[to].instantiate()
-	current_level = level_instance
-	add_child(level_instance)
-
-	current_level.level_finished.connect(_current_level_finished)
-
-	for i in get_children():
-		if i is Player:
-			i.global_position.y += 5
+	# Automatically start the server in headless mode.
+	if DisplayServer.get_name() == "headless":
+		print("Automatically starting dedicated server.")
+		_on_player_host.call_deferred()
 
 
 # Multiplayer
 func _on_player_host():
-	change_level(0, false)
+#	rpc("change_level", 0)
 
 	enet_peer.create_server(PORT, 4)
 	multiplayer.multiplayer_peer = enet_peer
@@ -50,20 +42,23 @@ func _on_player_host():
 	add_player(multiplayer.get_unique_id())
 
 	upnp_setup()
+	start_game()
 
 
 func _on_player_join(address):
-	change_level(0, false)
+#	change_level(0)
 
 	enet_peer.create_client(address, PORT)
 	multiplayer.multiplayer_peer = enet_peer
+
+	start_game()
 
 
 # Add player to multiplayer lobby
 func add_player(peer_id):
 	var player_instance = PLAYER.instantiate()
 	player_instance.name = str(peer_id)
-	add_child(player_instance)
+	$Players.add_child(player_instance)
 
 
 # Remove player from multiplayer lobby
@@ -91,5 +86,30 @@ func upnp_setup():
 	print("Success! Join Address: %s" % upnp.query_external_address())
 
 
+func start_game():
+	if multiplayer.is_server():
+		change_level(0)
+
+
+#@rpc("call_local", "any_peer")
+func change_level(to: int):
+	for i in $Level.get_children():
+		i.call_deferred("queue_free")
+
+	var level_instance = levels[to].instantiate()
+	current_level = level_instance
+	current_level_number = to
+	$Level.add_child(level_instance, true)
+
+	current_level.level_finished.connect(_current_level_finished)
+
+#	for i in get_children():
+#		if i is Player:
+#			i.global_position.y += 14
+#			print("a")
+
+
 func _current_level_finished():
-	change_level(current_level.next_level, true)
+	change_level(current_level.next_level)
+
+

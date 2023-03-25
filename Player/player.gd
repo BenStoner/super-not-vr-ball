@@ -1,7 +1,7 @@
 class_name Player
 extends RigidBody3D
 
-@export var speed: float = 10
+@export var speed: float = 13
 @export var max_speed: float = 20
 
 var move_direction := Vector3.ZERO
@@ -53,4 +53,13 @@ func _physics_process(_delta):
 		new_speed *= max_speed
 		set_linear_velocity(new_speed)
 
+	if Input.is_action_just_pressed("reset"):
+		reset_position()
+
 	spring_arm.position = position
+
+
+func reset_position():
+	global_position = Vector3(0, 1, 0)
+	angular_velocity = Vector3.ZERO
+	linear_velocity = Vector3.ZERO

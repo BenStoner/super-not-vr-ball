@@ -11,10 +11,10 @@ data = PackedVector3Array(50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0,
 [node name="Level" instance=ExtResource("1_xebtf")]
 
 [node name="Finish" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.03911)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.01484, -3.69405)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0001, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.03464, 0)
 mesh = SubResource("PlaneMesh_ptb71")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" index="0"]
