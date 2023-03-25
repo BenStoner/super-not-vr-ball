@@ -26,6 +26,7 @@ size = Vector2(25, 25)
 data = PackedVector3Array(12.5, 0, 12.5, -12.5, 0, 12.5, 12.5, 0, -12.5, -12.5, 0, 12.5, -12.5, 0, -12.5, 12.5, 0, -12.5)
 
 [node name="Level" instance=ExtResource("1_uogo2")]
+next_level = 1
 
 [node name="Finish" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.584804, -2.01463)

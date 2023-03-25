@@ -3,7 +3,7 @@ extends Node3D
 
 signal level_finished
 
-var next_level: int = 2
+@export var next_level: int = 0
 
 @onready var finish := $Finish
 

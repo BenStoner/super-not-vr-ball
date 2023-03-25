@@ -1,3 +1,4 @@
+class_name Player
 extends RigidBody3D
 
 @export var speed: float = 10

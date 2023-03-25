@@ -6,18 +6,20 @@ signal player_host
 const PLAYER = preload("res://Player/player.tscn")
 const PORT = 9999
 
+@export var start_level: PackedScene = null
 @export var levels: Array[PackedScene] = []
 
-var enet_peer = ENetMultiplayerPeer.new()
-
 var current_level
+
+var enet_peer = ENetMultiplayerPeer.new()
 
 
 func _ready() -> void:
 	player_host.connect(_on_player_host)
 	player_join.connect(_on_player_join.bind())
 
-	change_level(0, false)
+	var start_level_instance = start_level.instantiate()
+	add_child(start_level_instance)
 
 
 @rpc("call_local")
@@ -29,12 +31,16 @@ func change_level(to: int, free: bool):
 	current_level = level_instance
 	add_child(level_instance)
 
-	if current_level is Level:
-		current_level.level_finished.connect(_current_level_finished)
+	current_level.level_finished.connect(_current_level_finished)
+
+	for i in get_children():
+		if i is Player:
+			i.global_position.y += 5
 
 
+# Multiplayer
 func _on_player_host():
-	change_level(1, true)
+	change_level(0, false)
 
 	enet_peer.create_server(PORT, 4)
 	multiplayer.multiplayer_peer = enet_peer
@@ -47,7 +53,7 @@ func _on_player_host():
 
 
 func _on_player_join(address):
-	change_level(1, true)
+	change_level(0, false)
 
 	enet_peer.create_client(address, PORT)
 	multiplayer.multiplayer_peer = enet_peer
