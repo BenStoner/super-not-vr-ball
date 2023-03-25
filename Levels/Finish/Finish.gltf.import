@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ogi01ttrl8m3"
-path="res://.godot/imported/BasicTerrain.gltf-b085654f2377763fa68c6a039ba2c225.scn"
+uid="uid://cyuh51wa6i5pa"
+path="res://.godot/imported/Finish.gltf-bc3e4abba827462d88f16e74f2a98df3.scn"
 
 [deps]
 
-source_file="res://BasicTerrain.gltf"
-dest_files=["res://.godot/imported/BasicTerrain.gltf-b085654f2377763fa68c6a039ba2c225.scn"]
+source_file="res://Levels/Finish/Finish.gltf"
+dest_files=["res://.godot/imported/Finish.gltf-bc3e4abba827462d88f16e74f2a98df3.scn"]
 
 [params]
 

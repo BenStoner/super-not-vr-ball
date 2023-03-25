@@ -7,7 +7,9 @@ extends RigidBody3D
 var move_direction := Vector3.ZERO
 
 @onready var jump_timer := $JumpTimer
-@onready var camera := $Camera3D
+@onready var spring_arm := $SpringArm3D
+@onready var camera := $SpringArm3D/Target/InterpolatedCamera3D
+
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(str(name).to_int())
@@ -25,7 +27,7 @@ func _physics_process(_delta):
 	move_direction = Vector3.ZERO
 	move_direction.x = Input.get_axis("move_left", "move_right")
 	move_direction.z = Input.get_axis("move_forward", "move_backward")
-	move_direction = move_direction.rotated((Vector3.UP), camera.rotation.y).normalized()
+	move_direction = move_direction.rotated((Vector3.UP), spring_arm.rotation.y).normalized()
 
 	if not Input.is_action_pressed("brake"):
 		apply_central_force(move_direction * speed)
@@ -34,8 +36,8 @@ func _physics_process(_delta):
 	if Input.is_action_pressed("brake"):
 		linear_velocity.x = lerp(linear_velocity.x, 0.0, 0.1)
 		linear_velocity.z = lerp(linear_velocity.z, 0.0, 0.1)
-		rotation.x = lerp(rotation.x, 0.0, 0.1)
-		rotation.z = lerp(rotation.z, 0.0, 0.1)
+		rotation = lerp(rotation, Vector3.ZERO, 0.1)
+		angular_velocity = lerp(angular_velocity, Vector3.ZERO, 0.1)
 
 	# Small jump if not moving
 	if jump_timer.is_stopped():
@@ -50,3 +52,5 @@ func _physics_process(_delta):
 		var new_speed = get_linear_velocity().normalized()
 		new_speed *= max_speed
 		set_linear_velocity(new_speed)
+
+	spring_arm.position = position
