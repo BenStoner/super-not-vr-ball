@@ -17,6 +17,12 @@ properties/0/sync = true
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/sync = true
+properties/2/path = NodePath(".:angular_velocity")
+properties/2/spawn = true
+properties/2/sync = true
+properties/3/path = NodePath(".:linear_velocity")
+properties/3/spawn = true
+properties/3/sync = true
 
 [node name="Ball" type="RigidBody3D"]
 collision_layer = 4

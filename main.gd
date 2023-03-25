@@ -24,30 +24,22 @@ func _ready() -> void:
 
 	multiplayer.server_relay = false
 
-	# Automatically start the server in headless mode.
-	if DisplayServer.get_name() == "headless":
-		print("Automatically starting dedicated server.")
-		_on_player_host.call_deferred()
-
 
 # Multiplayer
 func _on_player_host():
-#	rpc("change_level", 0)
-
 	enet_peer.create_server(PORT, 4)
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
 
+	start_game()
+
 	add_player(multiplayer.get_unique_id())
 
 	upnp_setup()
-	start_game()
 
 
 func _on_player_join(address):
-#	change_level(0)
-
 	enet_peer.create_client(address, PORT)
 	multiplayer.multiplayer_peer = enet_peer
 
@@ -93,20 +85,18 @@ func start_game():
 
 #@rpc("call_local", "any_peer")
 func change_level(to: int):
-	for i in $Level.get_children():
-		i.call_deferred("queue_free")
+	for child in $Level.get_children():
+		child.call_deferred("queue_free")
 
 	var level_instance = levels[to].instantiate()
 	current_level = level_instance
 	current_level_number = to
+
 	$Level.add_child(level_instance, true)
+	
+	PlayerSpawnPosition.global_position = level_instance.player_spawn_pos.global_position
 
 	current_level.level_finished.connect(_current_level_finished)
-
-#	for i in get_children():
-#		if i is Player:
-#			i.global_position.y += 14
-#			print("a")
 
 
 func _current_level_finished():

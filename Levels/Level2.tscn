@@ -21,3 +21,9 @@ mesh = SubResource("PlaneMesh_ptb71")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_6b3rk")
+
+[node name="PlayerSpawnPos" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.420414, 1.09633, -3.69286)
+
+[node name="DeathZone" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.68675, 0)

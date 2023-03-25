@@ -19,6 +19,7 @@ func _ready() -> void:
 	if not is_multiplayer_authority(): return
 
 	camera.make_current()
+	global_position = PlayerSpawnPosition.global_position
 
 
 func _physics_process(_delta):
@@ -53,13 +54,18 @@ func _physics_process(_delta):
 		new_speed *= max_speed
 		set_linear_velocity(new_speed)
 
-	if Input.is_action_just_pressed("reset"):
-		reset_position()
-
 	spring_arm.position = position
 
 
-func reset_position():
-	global_position = Vector3(0, 1, 0)
+func level_changed(position):
+	global_position = position
+
+	angular_velocity = Vector3.ZERO
+	linear_velocity = Vector3.ZERO
+
+
+func respawn():
+	global_position = PlayerSpawnPosition.global_position
+
 	angular_velocity = Vector3.ZERO
 	linear_velocity = Vector3.ZERO

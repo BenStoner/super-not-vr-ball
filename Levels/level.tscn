@@ -1,9 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnjy6n71se2eb"]
+[gd_scene load_steps=5 format=3 uid="uid://dnjy6n71se2eb"]
 
 [ext_resource type="Script" path="res://Levels/Level.gd" id="1_itbs4"]
-[ext_resource type="PackedScene" uid="uid://c40dwvxxtafc5" path="res://finish.tscn" id="2_vnaw4"]
+[ext_resource type="PackedScene" uid="uid://c40dwvxxtafc5" path="res://Levels/Finish/finish.tscn" id="2_vnaw4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ca10f"]
+size = Vector3(186.805, 0.1, 173.47)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nug0y"]
+properties/0/path = NodePath("PlayerSpawnPos:position")
+properties/0/spawn = true
+properties/0/sync = true
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_itbs4")
 
 [node name="Finish" parent="." instance=ExtResource("2_vnaw4")]
+
+[node name="PlayerSpawnPos" type="Marker3D" parent="."]
+
+[node name="DeathZone" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathZone"]
+shape = SubResource("BoxShape3D_ca10f")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_nug0y")

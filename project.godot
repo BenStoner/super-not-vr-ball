@@ -14,6 +14,10 @@ config/name="Super-not-vr-ball"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+PlayerSpawnPosition="*res://Autoloads/PlayerSpawnPosition.tscn"
+
 [display]
 
 window/stretch/mode="canvas_items"
@@ -75,6 +79,7 @@ reset={
 3d_physics/layer_2="World"
 3d_physics/layer_3="Player"
 3d_physics/layer_4="Finish"
+3d_physics/layer_5="DeathZone"
 
 [rendering]
 
