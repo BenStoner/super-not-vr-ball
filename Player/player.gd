@@ -57,8 +57,8 @@ func _physics_process(_delta):
 	spring_arm.position = position
 
 
-func level_changed(position):
-	global_position = position
+func level_changed(new_position):
+	global_position = new_position
 
 	angular_velocity = Vector3.ZERO
 	linear_velocity = Vector3.ZERO

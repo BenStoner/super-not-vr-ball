@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Super-not-vr-ball"
+run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://icon.svg"
 
@@ -84,4 +85,5 @@ reset={
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/vram_compression/import_s3tc_bptc=true
 anti_aliasing/quality/msaa_3d=3
