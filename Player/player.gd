@@ -19,7 +19,6 @@ func _ready() -> void:
 	if not is_multiplayer_authority(): return
 
 	camera.make_current()
-	global_position = PlayerSpawnPosition.global_position
 
 
 func _physics_process(_delta):
@@ -57,15 +56,9 @@ func _physics_process(_delta):
 	spring_arm.position = position
 
 
-func level_changed(new_position):
+@rpc("any_peer", "call_local")
+func respawn(new_position):
 	global_position = new_position
-
-	angular_velocity = Vector3.ZERO
-	linear_velocity = Vector3.ZERO
-
-
-func respawn():
-	global_position = PlayerSpawnPosition.global_position
 
 	angular_velocity = Vector3.ZERO
 	linear_velocity = Vector3.ZERO

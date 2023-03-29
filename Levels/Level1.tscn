@@ -26,4 +26,4 @@ shape = SubResource("ConcavePolygonShape3D_0x20w")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.62606, 20.1878)
 
 [node name="DeathZone" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.00236, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.03721, 0)

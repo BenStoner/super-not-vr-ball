@@ -20,7 +20,7 @@ glow_enabled = true
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_goyri")
-start_level = ExtResource("2_ml0ej")
+main_menu = ExtResource("2_ml0ej")
 levels = Array[PackedScene]([ExtResource("3_qv7ph"), ExtResource("4_52d82")])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

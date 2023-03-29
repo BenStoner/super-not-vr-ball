@@ -8,11 +8,11 @@ var ener_peer = ENetMultiplayerPeer.new()
 @onready var address_entry := $AddressEntryMenu/VBoxContainer/AddressEntry
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if address_entry.text.is_valid_ip_address():
 		if Input.is_action_just_pressed("ui_accept"):
 			get_parent().emit_signal("player_join", address_entry.text)
-			queue_free()
+			hide()
 
 
 func shake_address_entry():
@@ -24,7 +24,7 @@ func shake_address_entry():
 
 func _on_host_button_pressed() -> void:
 	get_parent().emit_signal("player_host")
-	queue_free()
+	hide()
 
 
 func _on_join_button_pressed() -> void:

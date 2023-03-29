@@ -1,7 +1,7 @@
 class_name Level
 extends Node3D
 
-signal level_finished
+signal level_finished(next_level)
 
 @export var next_level: int = 0
 
@@ -15,10 +15,9 @@ func _ready() -> void:
 
 
 func finished(_body):
-	emit_signal("level_finished")
+	emit_signal("level_finished", next_level)
 
 
 func _body_entered(body):
 	if body is Player:
-		PlayerSpawnPosition.global_position = player_spawn_pos.global_position
-		body.respawn()
+		body.respawn(player_spawn_pos.global_position)

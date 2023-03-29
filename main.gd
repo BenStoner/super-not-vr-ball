@@ -6,21 +6,23 @@ signal player_host
 const PLAYER = preload("res://Player/player.tscn")
 const PORT = 9999
 
-@export var start_level: PackedScene = null
+@export var main_menu: PackedScene = null
 @export var levels: Array[PackedScene] = []
 
-var current_level
-var current_level_number
-
 var enet_peer = ENetMultiplayerPeer.new()
+
+var current_level
+
+@onready var players: Node = $Players
+@onready var level: Node = $Level
 
 
 func _ready() -> void:
 	player_host.connect(_on_player_host)
 	player_join.connect(_on_player_join.bind())
 
-	var start_level_instance = start_level.instantiate()
-	add_child(start_level_instance)
+	var main_menu_instance = main_menu.instantiate()
+	add_child(main_menu_instance)
 
 	multiplayer.server_relay = false
 
@@ -32,9 +34,9 @@ func _on_player_host():
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
 
-	start_game()
-
 	add_player(multiplayer.get_unique_id())
+
+	start_game()
 
 	upnp_setup()
 
@@ -50,7 +52,10 @@ func _on_player_join(address):
 func add_player(peer_id):
 	var player_instance = PLAYER.instantiate()
 	player_instance.name = str(peer_id)
-	$Players.add_child(player_instance)
+	players.add_child(player_instance)
+
+	if current_level != null:
+		player_instance.rpc("respawn", current_level.player_spawn_pos.global_position)
 
 
 # Remove player from multiplayer lobby
@@ -83,23 +88,19 @@ func start_game():
 		change_level(0)
 
 
-#@rpc("call_local", "any_peer")
 func change_level(to: int):
-	for child in $Level.get_children():
+	for child in level.get_children():
 		child.call_deferred("queue_free")
 
 	var level_instance = levels[to].instantiate()
+	level.add_child(level_instance, true)
 	current_level = level_instance
-	current_level_number = to
 
-	$Level.add_child(level_instance, true)
-	
-	PlayerSpawnPosition.global_position = level_instance.player_spawn_pos.global_position
+	for i in players.get_children():
+		i.rpc("respawn", level_instance.player_spawn_pos.global_position)
 
-	current_level.level_finished.connect(_current_level_finished)
+	level_instance.level_finished.connect(_current_level_finished.bind())
 
 
-func _current_level_finished():
-	change_level(current_level.next_level)
-
-
+func _current_level_finished(next_level):
+	change_level(next_level)
