@@ -19,6 +19,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="Main" type="Node3D"]
+process_mode = 3
 script = ExtResource("1_goyri")
 main_menu = ExtResource("2_ml0ej")
 levels = Array[PackedScene]([ExtResource("3_qv7ph"), ExtResource("4_52d82")])
