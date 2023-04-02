@@ -3,11 +3,28 @@
 [ext_resource type="Script" path="res://Autoloads/Timer.gd" id="1_fyvuh"]
 [ext_resource type="Theme" uid="uid://dewnqb7qh5lbm" path="res://Menus/MainTheme.tres" id="1_h6ynx"]
 
-[node name="Timer" type="Label"]
-offset_right = 179.0
-offset_bottom = 29.0
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_fyvuh")
+
+[node name="GameTimer" type="Label" parent="."]
+layout_mode = 2
+offset_right = 330.0
+offset_bottom = 51.0
 theme = ExtResource("1_h6ynx")
 theme_override_font_sizes/font_size = 30
 text = "393.116666666638"
-horizontal_alignment = 1
-script = ExtResource("1_fyvuh")
+vertical_alignment = 2
+
+[node name="LevelTimer" type="Label" parent="."]
+layout_mode = 2
+offset_top = 51.0
+offset_right = 330.0
+offset_bottom = 87.0
+theme = ExtResource("1_h6ynx")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "393.116666666638"

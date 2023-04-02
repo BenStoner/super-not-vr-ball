@@ -86,7 +86,8 @@ func upnp_setup():
 func start_game():
 	if multiplayer.is_server():
 		change_level(0)
-		RaceTimer.start()
+		RaceTimer.start_game_timer()
+		RaceTimer.start_level_timer()
 
 
 func change_level(to: int):
@@ -102,6 +103,7 @@ func change_level(to: int):
 
 	level_instance.level_finished.connect(_current_level_finished.bind())
 
+	RaceTimer.reset_level_timer()
 	CountDownTimer.rpc("countdown")
 
 
