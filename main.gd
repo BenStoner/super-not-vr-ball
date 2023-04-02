@@ -102,6 +102,8 @@ func change_level(to: int):
 
 	level_instance.level_finished.connect(_current_level_finished.bind())
 
+	CountDownTimer.rpc("countdown")
+
 
 func _current_level_finished(next_level):
 	change_level(next_level)

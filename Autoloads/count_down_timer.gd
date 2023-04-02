@@ -1,12 +1,11 @@
 extends Label
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("brake"):
-		countdown()
-
-
+@rpc("any_peer", "call_local")
 func countdown():
+	get_tree().paused = true
+	text = "3"
+	add_theme_color_override("font_color", Color("53ad71"))
 	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUART)
 	tween.set_parallel(true)
 	tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.5)
@@ -42,3 +41,5 @@ func countdown():
 	tween6.set_parallel(true)
 	tween6.tween_property(self, "scale", Vector2.ZERO, 0.5)
 	tween6.tween_property(self, "rotation_degrees", 0, 0.4)
+	await tween6.finished
+	get_tree().paused = false

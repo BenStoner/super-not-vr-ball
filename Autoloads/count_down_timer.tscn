@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://Autoloads/count_down_timer.gd" id="2_eek6g"]
 
 [node name="CountDownTimer" type="Label"]
+process_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
