@@ -13,8 +13,8 @@ var enet_peer = ENetMultiplayerPeer.new()
 
 var current_level
 
-@onready var players: Node = $Players
-@onready var level: Node = $Level
+@onready var players := $Players
+@onready var level := $Level
 
 
 func _ready() -> void:
@@ -86,8 +86,6 @@ func upnp_setup():
 func start_game():
 	if multiplayer.is_server():
 		change_level(0)
-		RaceTimer.start_game_timer()
-		RaceTimer.start_level_timer()
 
 
 func change_level(to: int):
@@ -103,7 +101,8 @@ func change_level(to: int):
 
 	level_instance.level_finished.connect(_current_level_finished.bind())
 
-	RaceTimer.reset_level_timer()
+	RaceTimer.rpc("reset_level_timer")
+	RaceTimer.rpc("start")
 	CountDownTimer.rpc("countdown")
 
 

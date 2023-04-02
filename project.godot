@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-RaceTimer="*res://Autoloads/timer.tscn"
 CountDownTimer="*res://Autoloads/count_down_timer.tscn"
+RaceTimer="*res://Autoloads/timer.tscn"
 
 [display]
 

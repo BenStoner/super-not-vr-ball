@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Autoloads/Timer.gd" id="1_fyvuh"]
 [ext_resource type="Theme" uid="uid://dewnqb7qh5lbm" path="res://Menus/MainTheme.tres" id="1_h6ynx"]
 
-[node name="Control" type="Control"]
+[node name="Timer" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
