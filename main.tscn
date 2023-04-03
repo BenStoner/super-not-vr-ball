@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dith3xbvvif2v"]
+[gd_scene load_steps=9 format=3 uid="uid://dith3xbvvif2v"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_goyri"]
 [ext_resource type="PackedScene" uid="uid://cpqna0u66nktt" path="res://Menus/MainMenu/main_menu.tscn" id="2_ml0ej"]
+[ext_resource type="PackedScene" uid="uid://4gxhfowbiygv" path="res://Levels/start_level.tscn" id="3_hlk22"]
 [ext_resource type="PackedScene" uid="uid://bcik54q8nnwli" path="res://Levels/Level1.tscn" id="3_qv7ph"]
 [ext_resource type="PackedScene" uid="uid://b81ieihyae8c1" path="res://Levels/Level2.tscn" id="4_52d82"]
 
@@ -23,6 +24,7 @@ process_mode = 3
 script = ExtResource("1_goyri")
 main_menu = ExtResource("2_ml0ej")
 levels = Array[PackedScene]([ExtResource("3_qv7ph"), ExtResource("4_52d82")])
+start_level = ExtResource("3_hlk22")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_c1yie")
@@ -36,7 +38,7 @@ _spawnable_scenes = PackedStringArray("res://Player/player.tscn")
 spawn_path = NodePath("../Players")
 
 [node name="Levelspawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Levels/Level1.tscn", "res://Levels/Level2.tscn")
+_spawnable_scenes = PackedStringArray("res://Levels/Level1.tscn", "res://Levels/Level2.tscn", "res://Levels/start_level.tscn")
 spawn_path = NodePath("../Level")
 spawn_limit = 1
 

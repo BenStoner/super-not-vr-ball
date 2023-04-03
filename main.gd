@@ -8,6 +8,7 @@ const PORT = 9999
 
 @export var main_menu: PackedScene = null
 @export var levels: Array[PackedScene] = []
+@export var start_level: PackedScene
 
 var enet_peer = ENetMultiplayerPeer.new()
 
@@ -85,7 +86,10 @@ func upnp_setup():
 
 func start_game():
 	if multiplayer.is_server():
-		change_level(0)
+		var instance = start_level.instantiate()
+		level.add_child(instance)
+		instance.player_added.connect(player_entered_start.bind())
+		instance.player_removed.connect(player_left_start)
 
 
 func change_level(to: int):
@@ -103,7 +107,19 @@ func change_level(to: int):
 
 	RaceTimer.rpc("reset_level_timer")
 	RaceTimer.rpc("start")
-	CountDownTimer.rpc("countdown")
+	CountDownTimer.rpc("countdown", true, 3)
+
+
+func player_entered_start(players_in):
+	if players_in == multiplayer.get_peers().size() + 1:
+		CountDownTimer.rpc("countdown", false, 5)
+		await CountDownTimer.countdown_ended
+		if players_in == multiplayer.get_peers().size() + 1:
+			change_level(0)
+
+
+func player_left_start():
+	CountDownTimer.stop_countdown()
 
 
 func _current_level_finished(next_level):

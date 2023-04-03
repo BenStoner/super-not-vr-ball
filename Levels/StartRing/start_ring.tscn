@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmyyv632q18en"]
+
+[ext_resource type="PackedScene" uid="uid://mq0funwcg8ed" path="res://Levels/StartRing/StartRing.gltf" id="1_jd8tn"]
+
+[node name="StartRing" instance=ExtResource("1_jd8tn")]
