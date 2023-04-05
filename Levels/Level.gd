@@ -1,7 +1,7 @@
 class_name Level
 extends Node3D
 
-signal level_finished(next_level)
+signal level_finished(next_level, body)
 
 @export var next_level: int = 0
 
@@ -14,8 +14,8 @@ func _ready() -> void:
 	$DeathZone.body_entered.connect(_body_entered.bind())
 
 
-func finished(_body):
-	emit_signal("level_finished", next_level)
+func finished(body):
+	emit_signal("level_finished", next_level, body)
 
 
 func _body_entered(body):

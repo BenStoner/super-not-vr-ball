@@ -6,6 +6,8 @@ extends RigidBody3D
 
 var move_direction := Vector3.ZERO
 
+@export var finished_level: bool = false
+
 @onready var jump_timer := $JumpTimer
 @onready var spring_arm := $SpringArm3D
 @onready var camera := $SpringArm3D/Target/InterpolatedCamera3D

@@ -61,7 +61,7 @@ func add_player(peer_id):
 
 # Remove player from multiplayer lobby
 func remove_player(peer_id):
-	var player = get_node_or_null(str(peer_id))
+	var player = players.get_node_or_null(str(peer_id))
 
 	if player:
 		player.queue_free()
@@ -119,8 +119,13 @@ func player_entered_start(players_in):
 
 
 func player_left_start():
-	CountDownTimer.stop_countdown()
+	CountDownTimer.rpc("stop_countdown")
 
 
-func _current_level_finished(next_level):
+func _current_level_finished(next_level, body):
+	body.finished_level = true
+	for i in players.get_children():
+		if i.finished_level == false:
+			return
+
 	change_level(next_level)

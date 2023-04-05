@@ -22,6 +22,7 @@ func countdown(pause: bool, length):
 	tween.tween_property(self, "scale", Vector2.ONE, 0.5)
 
 
+@rpc("any_peer", "call_local")
 func stop_countdown():
 	timer.stop()
 	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUART)
