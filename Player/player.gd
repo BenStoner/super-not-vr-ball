@@ -32,6 +32,11 @@ func _physics_process(_delta):
 		move_direction.z = Input.get_axis("move_forward", "move_backward")
 		move_direction = move_direction.rotated((Vector3.UP), spring_arm.rotation.y).normalized()
 
+		if linear_velocity.x > 3 or linear_velocity.x < -3 or linear_velocity.z > 3 or linear_velocity.z < -3:
+			$SmokeParticles.set_emitting(true)
+		else:
+			$SmokeParticles.set_emitting(false)
+
 		if not Input.is_action_pressed("brake"):
 			apply_central_force(move_direction * speed)
 
@@ -57,6 +62,10 @@ func _physics_process(_delta):
 			set_linear_velocity(new_speed)
 
 	spring_arm.position = position
+
+	$SmokeParticles.position.x = position.x
+	$SmokeParticles.position.y = position.y -0.2
+	$SmokeParticles.position.z = position.z
 
 
 @rpc("any_peer", "call_local")
