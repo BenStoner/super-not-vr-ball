@@ -6,6 +6,8 @@ extends RigidBody3D
 
 var move_direction := Vector3.ZERO
 
+var paused: bool = false
+
 @export var finished_level: bool = false
 
 @onready var jump_timer := $JumpTimer
@@ -32,7 +34,7 @@ func _physics_process(_delta):
 		move_direction.z = Input.get_axis("move_forward", "move_backward")
 		move_direction = move_direction.rotated((Vector3.UP), spring_arm.rotation.y).normalized()
 
-		if linear_velocity.x > 3 or linear_velocity.x < -3 or linear_velocity.z > 3 or linear_velocity.z < -3:
+		if linear_velocity.x > 4 or linear_velocity.x < -4 or linear_velocity.z > 4 or linear_velocity.z < -4:
 			$SmokeParticles.set_emitting(true)
 		else:
 			$SmokeParticles.set_emitting(false)

@@ -30,7 +30,7 @@ func stop_countdown():
 	get_tree().paused = false
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if timer.is_stopped(): return
 
 	text = str(round(timer.time_left))

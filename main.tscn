@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dith3xbvvif2v"]
+[gd_scene load_steps=10 format=3 uid="uid://dith3xbvvif2v"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_goyri"]
 [ext_resource type="PackedScene" uid="uid://cpqna0u66nktt" path="res://Menus/MainMenu/main_menu.tscn" id="2_ml0ej"]
 [ext_resource type="PackedScene" uid="uid://4gxhfowbiygv" path="res://Levels/start_level.tscn" id="3_hlk22"]
 [ext_resource type="PackedScene" uid="uid://bcik54q8nnwli" path="res://Levels/Level1.tscn" id="3_qv7ph"]
 [ext_resource type="PackedScene" uid="uid://b81ieihyae8c1" path="res://Levels/Level2.tscn" id="4_52d82"]
+[ext_resource type="PackedScene" uid="uid://cc2js2u1syc62" path="res://Menus/PauseMenu/pause_menu.tscn" id="6_4l13g"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2aubj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -22,7 +23,6 @@ glow_enabled = true
 [node name="Main" type="Node3D"]
 process_mode = 3
 script = ExtResource("1_goyri")
-main_menu = ExtResource("2_ml0ej")
 levels = Array[PackedScene]([ExtResource("3_qv7ph"), ExtResource("4_52d82")])
 start_level = ExtResource("3_hlk22")
 
@@ -45,3 +45,7 @@ spawn_limit = 1
 [node name="Players" type="Node" parent="."]
 
 [node name="Level" type="Node" parent="."]
+
+[node name="MainMenu" parent="." instance=ExtResource("2_ml0ej")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("6_4l13g")]

@@ -6,7 +6,6 @@ signal player_host
 const PLAYER = preload("res://Player/player.tscn")
 const PORT = 9999
 
-@export var main_menu: PackedScene = null
 @export var levels: Array[PackedScene] = []
 @export var start_level: PackedScene
 
@@ -14,18 +13,30 @@ var enet_peer = ENetMultiplayerPeer.new()
 
 var current_level
 
+var paused: bool = false
+
 @onready var players := $Players
 @onready var level := $Level
+@onready var main_menu := $MainMenu
+@onready var pause_menu := $PauseMenu
 
 
 func _ready() -> void:
 	player_host.connect(_on_player_host)
 	player_join.connect(_on_player_join.bind())
 
-	var main_menu_instance = main_menu.instantiate()
-	add_child(main_menu_instance)
-
 	multiplayer.server_relay = false
+
+
+func _process(delta: float) -> void:
+	if current_level != null:
+		if Input.is_action_just_pressed("esc"):
+			if paused:
+				pause_menu.rpc("unpause")
+				paused = false
+			else:
+				pause_menu.rpc("pause")
+				paused = true
 
 
 # Multiplayer
@@ -65,6 +76,8 @@ func remove_player(peer_id):
 
 	if player:
 		player.queue_free()
+		get_tree().multiplayer_poll
+		MultiplayerPeer.disconnect_peer(peer_id)
 
 
 func upnp_setup():
@@ -88,6 +101,7 @@ func start_game():
 	if multiplayer.is_server():
 		var instance = start_level.instantiate()
 		level.add_child(instance)
+		current_level = instance
 		instance.player_added.connect(player_entered_start.bind())
 		instance.player_removed.connect(player_left_start)
 
