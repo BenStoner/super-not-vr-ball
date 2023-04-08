@@ -1,6 +1,9 @@
 class_name Player
 extends RigidBody3D
 
+signal pause
+signal unpause
+
 @export var speed: float = 13
 @export var max_speed: float = 20
 
@@ -13,6 +16,7 @@ var paused: bool = false
 @onready var jump_timer := $JumpTimer
 @onready var spring_arm := $SpringArm3D
 @onready var camera := $SpringArm3D/Target/InterpolatedCamera3D
+@onready var pause_menu := $CanvasLayer/PauseMenu
 
 
 func _enter_tree() -> void:
@@ -27,7 +31,7 @@ func _ready() -> void:
 
 func _physics_process(_delta):
 	if not is_multiplayer_authority(): return
-	if get_tree().paused == false:
+	if get_tree().paused == false and paused == false:
 		# Movement
 		move_direction = Vector3.ZERO
 		move_direction.x = Input.get_axis("move_left", "move_right")
@@ -68,6 +72,16 @@ func _physics_process(_delta):
 	$SmokeParticles.position.x = position.x
 	$SmokeParticles.position.y = position.y -0.2
 	$SmokeParticles.position.z = position.z
+
+	if Input.is_action_just_pressed("esc"):
+		if paused:
+			print("u")
+			pause_menu.unpause()
+			paused = false
+		else:
+			print("p")
+			pause_menu.pause()
+			paused = true
 
 
 @rpc("any_peer", "call_local")
