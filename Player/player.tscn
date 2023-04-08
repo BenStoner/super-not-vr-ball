@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c6u30yt620yww"]
+[gd_scene load_steps=9 format=3 uid="uid://c6u30yt620yww"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_3agts"]
 [ext_resource type="Script" path="res://Player/SpringArm3D.gd" id="3_3ea8e"]
 [ext_resource type="PackedScene" uid="uid://dycpp3hophw6v" path="res://Player/Models/ball.tscn" id="3_t28qo"]
 [ext_resource type="Script" path="res://addons/interpolated_camera_3d/interpolated_camera_3d.gd" id="4_ikko2"]
 [ext_resource type="PackedScene" uid="uid://cqcfs31y6me7c" path="res://Player/smoke_particles.tscn" id="5_ih5lh"]
-[ext_resource type="PackedScene" uid="uid://cc2js2u1syc62" path="res://Menus/PauseMenu/pause_menu.tscn" id="6_ys7tu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dmg1t"]
 bounce = 0.3
@@ -63,7 +62,3 @@ replication_config = SubResource("SceneReplicationConfig_34hwx")
 [node name="SmokeParticles" parent="." instance=ExtResource("5_ih5lh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.183311, 0)
 emitting = false
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("6_ys7tu")]

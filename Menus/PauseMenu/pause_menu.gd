@@ -16,12 +16,14 @@ func unpause_receive():
 @rpc("any_peer", "call_local")
 func pause():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	get_tree().paused = true
 	show()
 
 
 @rpc("any_peer", "call_local")
 func unpause():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	get_tree().paused = false
 	hide()
 
 

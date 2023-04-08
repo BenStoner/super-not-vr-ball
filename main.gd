@@ -18,6 +18,8 @@ var paused: bool = false
 @onready var players := $Players
 @onready var level := $Level
 @onready var main_menu := $MainMenu
+@onready var pause_menu := $PauseMenu
+
 
 func _ready() -> void:
 	player_host.connect(_on_player_host)
@@ -26,15 +28,16 @@ func _ready() -> void:
 	multiplayer.server_relay = false
 
 
-#func _process(_delta: float) -> void:
-#	if current_level != null:
-#		if Input.is_action_just_pressed("esc"):
-#			if paused:
-#				pause_menu.rpc("unpause")
-#				paused = false
-#			else:
-#				pause_menu.rpc("pause")
-#				paused = true
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("esc"):
+		if paused:
+			print("unpause")
+			pause_menu.unpause()
+			paused = false
+		else:
+			print("pause")
+			pause_menu.pause()
+			paused = true
 
 
 func _on_player_host():
