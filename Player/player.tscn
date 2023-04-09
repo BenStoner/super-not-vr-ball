@@ -27,6 +27,12 @@ properties/3/sync = true
 properties/4/path = NodePath(".:finished_level")
 properties/4/spawn = true
 properties/4/sync = true
+properties/5/path = NodePath("SmokeParticles:position")
+properties/5/spawn = true
+properties/5/sync = true
+properties/6/path = NodePath("SmokeParticles:emitting")
+properties/6/spawn = true
+properties/6/sync = true
 
 [node name="Ball" type="RigidBody3D"]
 collision_layer = 4
