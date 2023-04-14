@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c6u30yt620yww"]
+[gd_scene load_steps=18 format=3 uid="uid://c6u30yt620yww"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_3agts"]
 [ext_resource type="Script" path="res://Player/SpringArm3D.gd" id="3_3ea8e"]
 [ext_resource type="PackedScene" uid="uid://dycpp3hophw6v" path="res://Player/Models/ball.tscn" id="3_t28qo"]
 [ext_resource type="Script" path="res://addons/interpolated_camera_3d/interpolated_camera_3d.gd" id="4_ikko2"]
-[ext_resource type="PackedScene" uid="uid://cqcfs31y6me7c" path="res://Player/smoke_particles.tscn" id="5_ih5lh"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dmg1t"]
 bounce = 0.3
@@ -33,6 +32,62 @@ properties/5/sync = true
 properties/6/path = NodePath("SmokeParticles:emitting")
 properties/6/spawn = true
 properties/6/sync = true
+
+[sub_resource type="Curve" id="Curve_lyqlx"]
+_data = [Vector2(0, 0.142748), 0.0, 0.0, 0, 0, Vector2(0.702394, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_6ownq"]
+curve = SubResource("Curve_lyqlx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4bqjg"]
+emission_shape = 3
+emission_box_extents = Vector3(0.2, 0.1, 0.2)
+gravity = Vector3(2.08165e-12, 4, 2.08165e-12)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+angle_max = 1.4
+scale_min = 0.3
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_6ownq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_io25u"]
+transparency = 1
+shading_mode = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_ghq5e"]
+material = SubResource("StandardMaterial3D_io25u")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="Curve" id="Curve_6d5aw"]
+_data = [Vector2(0, 0.142748), 0.0, 0.0, 0, 0, Vector2(0.702394, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4j4pe"]
+curve = SubResource("Curve_6d5aw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gr332"]
+emission_shape = 3
+emission_box_extents = Vector3(0.2, 0.1, 0.2)
+spread = 180.0
+flatness = 0.85
+gravity = Vector3(2.08165e-12, -5, 2.08165e-12)
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+angle_max = 1.4
+scale_min = 0.3
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_4j4pe")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wyfhp"]
+transparency = 1
+shading_mode = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_rtdgy"]
+material = SubResource("StandardMaterial3D_wyfhp")
+radius = 0.25
+height = 0.5
 
 [node name="Ball" type="RigidBody3D"]
 collision_layer = 4
@@ -65,6 +120,20 @@ one_shot = true
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_34hwx")
 
-[node name="SmokeParticles" parent="." instance=ExtResource("5_ih5lh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.183311, 0)
+[node name="SmokeParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(-4.37114e-08, -3.48787e-16, -1, 3.48787e-16, 1, -3.48787e-16, 1, -3.48787e-16, -4.37114e-08, 0, 0, 0)
 emitting = false
+amount = 100
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_4bqjg")
+draw_pass_1 = SubResource("SphereMesh_ghq5e")
+
+[node name="JumpParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.403828, 0)
+emitting = false
+amount = 30
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_gr332")
+draw_pass_1 = SubResource("SphereMesh_rtdgy")

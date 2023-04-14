@@ -16,7 +16,10 @@ sky_material = ExtResource("5_14i5t")
 background_mode = 2
 sky = SubResource("Sky_tt4m6")
 tonemap_mode = 2
-glow_enabled = true
+ssao_enabled = true
+fog_light_energy = 0.57
+fog_density = 0.0
+volumetric_fog_density = 0.0
 
 [node name="Main" type="Node3D"]
 process_mode = 3
@@ -28,11 +31,11 @@ start_level = ExtResource("3_hlk22")
 environment = SubResource("Environment_c1yie")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.992851, 0.119357, 0, -0.119357, 0.992851, 0, 0, 0)
-light_energy = 0.7
+transform = Transform3D(1, 0, 0, 0, 0.25882, 0.965926, 0, -0.965926, 0.25882, 0, 0, 0)
 shadow_enabled = true
 script = ExtResource("6_nbva1")
-time_of_day = 17.543
+day_cycle = true
+time_of_day = 13.0
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Player/player.tscn")

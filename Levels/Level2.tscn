@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://dnjy6n71se2eb" path="res://Levels/level.tscn" id="1_xebtf"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_ptb71"]
-size = Vector2(100, 100)
+[sub_resource type="BoxMesh" id="BoxMesh_jin7v"]
+size = Vector3(100, 1, 100)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6b3rk"]
 data = PackedVector3Array(50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, -50, 50, 0, -50)
@@ -14,10 +14,11 @@ data = PackedVector3Array(50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.01484, -3.69405)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.03464, 0)
-mesh = SubResource("PlaneMesh_ptb71")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.63489, 0)
+mesh = SubResource("BoxMesh_jin7v")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.488865, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_6b3rk")

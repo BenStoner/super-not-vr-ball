@@ -1,13 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://dv8v8nhoooppa"]
 
 [ext_resource type="Script" path="res://Autoloads/Timer.gd" id="1_fyvuh"]
-[ext_resource type="Theme" uid="uid://dewnqb7qh5lbm" path="res://Menus/MainTheme.tres" id="1_h6ynx"]
+[ext_resource type="Theme" path="res://Menus/MainTheme.tres" id="1_h6ynx"]
 
 [node name="Timer" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("1_h6ynx")
 script = ExtResource("1_fyvuh")
 
 [node name="GameTimer" type="Label" parent="."]

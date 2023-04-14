@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://gujkox1k7a36"]
 
-[ext_resource type="Theme" uid="uid://dewnqb7qh5lbm" path="res://Menus/MainTheme.tres" id="1_6g8u8"]
+[ext_resource type="Theme" path="res://Menus/MainTheme.tres" id="1_6g8u8"]
 [ext_resource type="Script" path="res://Autoloads/count_down_timer.gd" id="2_eek6g"]
 
 [node name="CountDownTimer" type="Label"]

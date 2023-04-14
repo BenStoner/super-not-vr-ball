@@ -1,9 +1,6 @@
 class_name Player
 extends RigidBody3D
 
-signal pause
-signal unpause
-
 @export var speed: float = 13
 @export var max_speed: float = 20
 
@@ -16,6 +13,7 @@ var paused: bool = false
 @onready var jump_timer := $JumpTimer
 @onready var spring_arm := $SpringArm3D
 @onready var camera := $SpringArm3D/Target/InterpolatedCamera3D
+
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(str(name).to_int())
@@ -56,7 +54,9 @@ func _physics_process(_delta):
 			if linear_velocity.x <= 0.15 and linear_velocity.y <= 0.15 and linear_velocity.y <= 0.15 and linear_velocity.x >= -0.15 and linear_velocity.y >= -0.15 and linear_velocity.y >= -0.15:
 				if Input.is_action_just_pressed("jump"):
 					jump_timer.start()
+					$JumpParticles.set_emitting(true)
 					apply_central_force(Vector3.UP * 200)
+					$JumpParticles.restart()
 
 		# Limits soeed
 		if abs(get_linear_velocity().x) > max_speed or abs(get_linear_velocity().y) > max_speed or abs(get_linear_velocity().z) > max_speed\
@@ -67,9 +67,9 @@ func _physics_process(_delta):
 
 	spring_arm.position = position
 
-	$SmokeParticles.position.x = position.x
-	$SmokeParticles.position.y = position.y -0.2
-	$SmokeParticles.position.z = position.z
+#	$SmokeParticles.position.x = position.x
+#	$SmokeParticles.position.y = position.y -0.2
+#	$SmokeParticles.position.z = position.z
 
 
 @rpc("any_peer", "call_local")
