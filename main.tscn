@@ -1,15 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://dith3xbvvif2v"]
+[gd_scene load_steps=11 format=3 uid="uid://bjxfax0b4x5x5"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_goyri"]
 [ext_resource type="PackedScene" uid="uid://cpqna0u66nktt" path="res://Menus/MainMenu/main_menu.tscn" id="2_ml0ej"]
 [ext_resource type="PackedScene" uid="uid://4gxhfowbiygv" path="res://Levels/start_level.tscn" id="3_hlk22"]
 [ext_resource type="PackedScene" uid="uid://bcik54q8nnwli" path="res://Levels/Level1.tscn" id="3_qv7ph"]
 [ext_resource type="PackedScene" uid="uid://b81ieihyae8c1" path="res://Levels/Level2.tscn" id="4_52d82"]
-[ext_resource type="Material" uid="uid://bb7r8v74tfsup" path="res://sky.tres" id="5_2v4nm"]
+[ext_resource type="Material" uid="uid://b7msy3nvdyqd3" path="res://Misc/sky.tres" id="5_14i5t"]
 [ext_resource type="PackedScene" uid="uid://cc2js2u1syc62" path="res://Menus/PauseMenu/pause_menu.tscn" id="6_4l13g"]
+[ext_resource type="Script" path="res://DirectionalLight3D.gd" id="6_nbva1"]
 
 [sub_resource type="Sky" id="Sky_tt4m6"]
-sky_material = ExtResource("5_2v4nm")
+sky_material = ExtResource("5_14i5t")
 
 [sub_resource type="Environment" id="Environment_c1yie"]
 background_mode = 2
@@ -27,9 +28,11 @@ start_level = ExtResource("3_hlk22")
 environment = SubResource("Environment_c1yie")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 5.27224e-09, -2.99004e-08, 2.99004e-08, -0.34202, 0.939693, -5.27224e-09, -0.939693, -0.34202, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.992851, 0.119357, 0, -0.119357, 0.992851, 0, 0, 0)
 light_energy = 0.7
 shadow_enabled = true
+script = ExtResource("6_nbva1")
+time_of_day = 17.543
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Player/player.tscn")

@@ -1,8 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://84ktuki31uga"]
+[gd_scene load_steps=4 format=3 uid="uid://84ktuki31uga"]
 
 [ext_resource type="PackedScene" uid="uid://cyuh51wa6i5pa" path="res://Levels/Finish/Finish.gltf" id="1_rv2ui"]
+[ext_resource type="Shader" path="res://CellShader/CellShader.gdshader" id="2_50sov"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nl10p"]
+render_priority = 0
+shader = ExtResource("2_50sov")
+shader_parameter/color = Color(0.984314, 0.72549, 0.329412, 1)
+shader_parameter/specular = Color(0.301961, 0.301961, 0.301961, 0.121569)
+shader_parameter/fresnel = Color(0.2, 0.2, 0.2, 0.3)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
 
 [node name="Finish" instance=ExtResource("1_rv2ui")]
 
 [node name="Cylinder" parent="." index="0"]
 transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 0, 1.90234, 0)
+surface_material_override/0 = SubResource("ShaderMaterial_nl10p")

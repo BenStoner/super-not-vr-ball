@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://hq8i10ckakgw"
-path="res://.godot/imported/BowlbyOne-Regular.ttf-33a3a5a40db6a2a26d201fb09b17320b.fontdata"
+path="res://.godot/imported/BowlbyOne-Regular.ttf-bd94682eed6850609e754b45927f450b.fontdata"
 
 [deps]
 
-source_file="res://BowlbyOne-Regular.ttf"
-dest_files=["res://.godot/imported/BowlbyOne-Regular.ttf-33a3a5a40db6a2a26d201fb09b17320b.fontdata"]
+source_file="res://Misc/BowlbyOne-Regular.ttf"
+dest_files=["res://.godot/imported/BowlbyOne-Regular.ttf-bd94682eed6850609e754b45927f450b.fontdata"]
 
 [params]
 
